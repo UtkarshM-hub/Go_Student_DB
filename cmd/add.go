@@ -1,14 +1,38 @@
 /*
 Copyright © 2022 NAME HERE <EMAIL ADDRESS>
-
 */
 package cmd
 
 import (
 	"fmt"
 
+	db "github.com/UtkarshM-hub/student/DB"
 	"github.com/spf13/cobra"
 )
+
+var (
+	name string;
+	age int;
+	programming string;
+)
+
+func GenerateForm(){
+	var firstName, LastName string
+
+	fmt.Println(Blue+`Student Info:`+Reset)
+	fmt.Println("\nEnter First Name of the student:")
+	fmt.Scanln(&firstName)
+	fmt.Println("\nEnter Last Name of the student:")
+	fmt.Scanln(&LastName)
+
+	fmt.Println("\nEnter Age of the student:")
+	fmt.Scanln(&age)
+
+	fmt.Println("\nEnter the Programming Language Student Prefers:")
+	fmt.Scan(&programming)
+	
+	name=firstName+" "+LastName
+}
 
 // AddCmd represents the Add command
 var AddCmd = &cobra.Command{
@@ -21,7 +45,9 @@ Cobra is a CLI library for Go that empowers applications.
 This application is a tool to generate the needed files
 to quickly create a Cobra application.`,
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println("Add called")
+		GenerateForm()
+		// fmt.Println(name,age,programming)
+		db.AddStudent(name,age,programming)
 	},
 }
 
