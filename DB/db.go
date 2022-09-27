@@ -3,6 +3,7 @@ package db
 import (
 	"encoding/json"
 	"errors"
+	"fmt"
 	"log"
 	"os"
 )
@@ -38,6 +39,21 @@ func AddStudent(name string,age int,language string){
 
 	data = append(data, newStudent)
 
+	UpdateDB(data)
+}
+
+func DeleteStudent(index int){
+	data,err:=GetStudents()
+	if err!=nil{
+		log.Fatal("Error occured while fetching student data")
+	}
+
+	// handle wrong user input
+	if index>=len(data){
+		fmt.Println("❗ Can't find a student at index",index)
+		return
+	}
+	data=append(data[:index-1],data[index:]... )
 	UpdateDB(data)
 }
 
