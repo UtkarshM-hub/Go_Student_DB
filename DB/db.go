@@ -66,3 +66,25 @@ func UpdateDB(students []Student){
 	}
 	os.WriteFile("DB/db.json",input,0644)
 }
+
+func UpdateUserInfo(name string,age int, language string,index int){
+	data,err:=GetStudents()
+	if err!=nil{
+		log.Fatal("Error occured while fetching student data")
+	}
+
+	// handle wrong user input
+	if index>=len(data){
+		fmt.Println("❗ Can't find a student at index",index)
+		return
+	}
+
+	var newInfo Student
+	newInfo.Name=name
+	newInfo.Age=age
+	newInfo.ProgrammingLanguage=language
+
+	data[index-1]=newInfo
+
+	UpdateDB(data)
+}
