@@ -3,7 +3,6 @@ package db
 import (
 	"encoding/json"
 	"errors"
-	"fmt"
 	"log"
 	"os"
 )
@@ -26,11 +25,11 @@ func GetStudents() ([]Student, error) {
 }
 
 // Add the Student to database
-func AddStudent(name string,age int,language string){
+func AddStudent(name string,age int,language string) error {
 	// get students from db to append data
 	data,err:=GetStudents()
 	if err!=nil{
-		log.Fatal(err)
+		return err
 	}
 	var newStudent Student
 	newStudent.Name=name
@@ -40,21 +39,22 @@ func AddStudent(name string,age int,language string){
 	data = append(data, newStudent)
 
 	UpdateDB(data)
+	return nil
 }
 
-func DeleteStudent(index int){
+func DeleteStudent(index int) error {
 	data,err:=GetStudents()
 	if err!=nil{
-		log.Fatal("Error occured while fetching student data")
+		return errors.New("error occured while fetching student data")
 	}
 
 	// handle wrong user input
 	if index>=len(data){
-		fmt.Println("❗ Can't find a student at index",index)
-		return
+		return errors.New("cant find a student at index")
 	}
 	data=append(data[:index-1],data[index:]... )
 	UpdateDB(data)
+	return nil
 }
 
 // Update database
@@ -67,16 +67,15 @@ func UpdateDB(students []Student){
 	os.WriteFile("DB/db.json",input,0644)
 }
 
-func UpdateUserInfo(name string,age int, language string,index int){
+func UpdateUserInfo(name string,age int, language string,index int)error{
 	data,err:=GetStudents()
 	if err!=nil{
-		log.Fatal("Error occured while fetching student data")
+		return errors.New("error occured while fetching student data")
 	}
 
 	// handle wrong user input
-	if index>=len(data){
-		fmt.Println("❗ Can't find a student at index",index)
-		return
+	if index>len(data){
+		return errors.New("can't find a student at index")
 	}
 
 	var newInfo Student
@@ -87,4 +86,5 @@ func UpdateUserInfo(name string,age int, language string,index int){
 	data[index-1]=newInfo
 
 	UpdateDB(data)
+	return nil
 }
