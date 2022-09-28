@@ -43,7 +43,7 @@ var rootCmd = &cobra.Command{
 	2. Delete
 	3. Update
 	4. List` + Reset)
-		println(Yellow + `To Get an example of command you can use following command:`+White+` student help {COMMAND_NAME}`+Yellow+`
+		println(Yellow + `To Get an example of command you can use following command:`+White+` student help {COMMAND_NAME}+Cmd`+Yellow+`
 
 for example:`+White+` student help AddCmd` + Reset)
 	},

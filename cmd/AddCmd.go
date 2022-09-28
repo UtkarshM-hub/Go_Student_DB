@@ -5,6 +5,7 @@ package cmd
 
 import (
 	"fmt"
+
 	"github.com/spf13/cobra"
 )
 
@@ -16,7 +17,7 @@ var AddCmdCmd = &cobra.Command{
 	Run: func(cmd *cobra.Command, args []string) {
 		fmt.Println(Blue+"Add Command:"+Reset)
 		fmt.Println(`	It is used to add student information into database.
-	When the command is invoked by running `+Yellow+`student add `+Reset+
+	When the command is invoked by running `+Yellow+`student Add `+Reset+
 	`It generates a form to fill in the student information.
 	Like Name, Age and Programming Language the student prefers.`)
 	},
