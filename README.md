@@ -10,7 +10,7 @@ It is command line tool to manage student database.The tool provides various opt
   ```bash
   go mod download && go build .
   ```
-### Congratulations🥳🎊 you've completed the setup of GO_CRUD_API on your local machine
+### Congratulations🥳🎊 you've completed the setup of GO_Student_DB on your local machine
 
 ## #Commands
 
