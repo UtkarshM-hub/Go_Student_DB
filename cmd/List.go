@@ -20,7 +20,7 @@ var ListCmd = &cobra.Command{
 	Run: func(cmd *cobra.Command, args []string) {
 		data,err:=db.GetStudents()
 		if err!=nil{
-			fmt.Println("❗ Error fetching student data")
+			fmt.Printf("❗"+Red+"Error getting data from the database"+Reset)
 		}
 		output:=[][]string{}
 

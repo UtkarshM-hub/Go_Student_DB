@@ -4,6 +4,7 @@ Copyright © 2022 NAME HERE <EMAIL ADDRESS>
 package cmd
 
 import (
+	"fmt"
 	"log"
 	"strconv"
 
@@ -22,7 +23,12 @@ var UpdateCmd = &cobra.Command{
 			log.Fatal("The Value provided by the user is not valid!❗")
 		}
 		name,age,language:=GenerateForm()
-		db.UpdateUserInfo(name,age,language,intVal)
+		err=db.UpdateUserInfo(name,age,language,intVal)
+		if err!=nil{
+			fmt.Printf("❗"+Red+"Error Updating Student from index %v"+Reset,intVal)
+		} else {
+			fmt.Println("✔"+Green+" Successfully Updated the Student Information"+Reset)
+		}
 	},
 }
 

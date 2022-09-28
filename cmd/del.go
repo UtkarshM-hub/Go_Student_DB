@@ -4,8 +4,10 @@ Copyright © 2022 NAME HERE <EMAIL ADDRESS>
 package cmd
 
 import (
+	"fmt"
 	"log"
 	"strconv"
+
 	db "github.com/UtkarshM-hub/student/DB"
 	"github.com/spf13/cobra"
 )
@@ -20,7 +22,12 @@ var delCmd = &cobra.Command{
 		if err!=nil{
 			log.Fatal("The Value provided by the user is not valid!❗")
 		}
-		db.DeleteStudent(intVal)
+		err=db.DeleteStudent(intVal)
+		if err!=nil{
+			fmt.Printf("❗"+Red+"Error Deleting Student from index %v"+Reset,intVal)
+		} else {
+			fmt.Println("✔"+Green+" Successfully Deleted the Student Information"+Reset)
+		}
 	},
 }
 
